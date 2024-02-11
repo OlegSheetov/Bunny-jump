@@ -6,7 +6,7 @@ import GameOver from './scenes/GameOver.js'
 export default new Phaser.Game({
     type: Phaser.AUTO, 
     scale: { 
-        mode: Phaser.Scale.RESIZE,
+        mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
     scene: [Game, GameOver],
