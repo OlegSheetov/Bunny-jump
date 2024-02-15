@@ -16,6 +16,8 @@ export default class Game extends Phaser.Scene {
 
     PlayerVelocity = -300
 
+    NumberOfPlatform = 8 
+
 
 
     findBottomMostPlatform(){ 
@@ -109,9 +111,9 @@ export default class Game extends Phaser.Scene {
         this.add.image(240 , 320, 'background').setScrollFactor(1,0);
         this.platforms = this.physics.add.staticGroup();
 
-        for(let i=0; i < 8 ; ++i){
+        for(let i=0; i < this.NumberOfPlatform ; ++i){
 
-            const x = Phaser.Math.Between(80,400);
+            const x = Phaser.Math.Between(-50 , 400);
             const y = 150 * i
 
             const platform = this.platforms.create(x, y, 'platform');
@@ -120,6 +122,8 @@ export default class Game extends Phaser.Scene {
 
             const body = platform.body
             body.updateFromGameObject()
+
+            // Disable colision from bottom , left and right 
             body.checkCollision.down = false
             body.checkCollision.left = false 
             body.checkCollision.right = false
@@ -154,15 +158,10 @@ export default class Game extends Phaser.Scene {
             .setScrollFactor(0)
             .setOrigin(0.5, 0);
 
-
-
-
-    
-            
-
     }
 
     update(t , dt){
+        // auto jump and increasing speed each jump 
         const touchingDown = this.player.body.touching.down
         if(touchingDown){ 
             // Jump
@@ -175,9 +174,14 @@ export default class Game extends Phaser.Scene {
 
             //play jump sound
             this.sound.play('jump');
+
+            // Increate count of platforms each jump
+            this.NumberOfPlatform++
+            console.log(this.NumberOfPlatform)
             
 
         }
+        // Change player texture to stand
         const vy = this.player.body.velocity.y;
         if(vy > 0 && this.player.texture.key !== 'bunny-stand'){ 
             this.player.setTexture('bunny-stand');
@@ -185,9 +189,10 @@ export default class Game extends Phaser.Scene {
 
         this.platforms.children.iterate(child => { 
             
+        // reuse platforms ? 
         const platform = child 
         const scrollY = this.cameras.main.scrollY
-        if(platform.y >= scrollY +700){
+        if(platform.y >= scrollY + 700){
             platform.y = scrollY - Phaser.Math.Between(50 , 100);
             platform.body.updateFromGameObject();
 
@@ -207,7 +212,7 @@ export default class Game extends Phaser.Scene {
             //this.player.setVelocityX(0)
         }
 
-        this.horizontalWrap(this.player);
+        //this.horizontalWrap(this.player);
 
         const bottomPlatform = this.findBottomMostPlatform() 
         if(this.player.y > bottomPlatform.y + 200) { 
