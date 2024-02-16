@@ -20,6 +20,9 @@ export default class Game extends Phaser.Scene {
 
 
 
+
+
+
     findBottomMostPlatform(){ 
         const platforms = this.platforms.getChildren()
         let bottomPlatform = platforms[0];
@@ -158,6 +161,32 @@ export default class Game extends Phaser.Scene {
             .setScrollFactor(0)
             .setOrigin(0.5, 0);
 
+
+        //Buttons for mobile input 
+        const buttonL = this.add.text(300 , 600 ,
+            '<', 
+            {fill: '#fffff' , fontSize: 104})
+        buttonL.setInteractive().setScrollFactor(0);
+
+        buttonL.on('pointerdown' ,() => {
+
+
+            this.player.setVelocityX(-200);
+        })
+
+        const buttonR = this.add.text(600 , 600 ,
+            '>', 
+            {fill: '#fffff' , fontSize: 104})
+        buttonR.setInteractive().setScrollFactor(0);
+
+        buttonR.on('pointerdown' ,() => { 
+
+
+            
+            this.player.setVelocityX(200);
+        })
+
+
     }
 
     update(t , dt){
@@ -177,7 +206,6 @@ export default class Game extends Phaser.Scene {
 
             // Increate count of platforms each jump
             this.NumberOfPlatform++
-            console.log(this.NumberOfPlatform)
             
 
         }

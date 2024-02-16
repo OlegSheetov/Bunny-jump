@@ -21,6 +21,15 @@ export default class GameOver extends Phaser.Scene{
         this.input.keyboard.once( 'keydown-SPACE' , ()=> { 
             this.scene.start('game');
         } )
+        
+        const buttonRestart = this.add.text(400 , 600 ,
+            'Restart',
+            {  fontSize: 44  })
+        buttonRestart.setInteractive().setScrollFactor(0);
+
+        buttonRestart.on('pointerdown' ,() => { 
+            this.scene.start('game');
+        })
     }
 
 
