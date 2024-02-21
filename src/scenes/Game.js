@@ -205,7 +205,7 @@ export default class Game extends Phaser.Scene {
             this.sound.play('jump');
 
             // Increate count of platforms each jump
-            this.NumberOfPlatform++
+            //this.NumberOfPlatform++
             
 
         }

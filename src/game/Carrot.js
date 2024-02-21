@@ -5,5 +5,7 @@ export default class Carrot extends Phaser.GameObjects.Sprite  {
         super(scene, x, y, texture);
         this.setScale(0.5);
     }
-
+    create() { 
+        this.physics.add.collider(this.platforms, this.carrot)
+    }
 }

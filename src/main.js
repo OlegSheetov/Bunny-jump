@@ -10,6 +10,7 @@ export default new Phaser.Game({
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
     scene: [Game, GameOver],
+    powerPreference: 'high-performance',
     physics: { 
         default: 'arcade',
         arcade: { 
