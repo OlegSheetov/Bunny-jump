@@ -94,7 +94,7 @@ export default class Game extends Phaser.Scene {
 
 
     preload(){
-        this.load.image('background', 'assets/bg_layer1.png');
+        this.load.image('background', 'assets/bg_layer1_compressed.png');
         this.load.image('platform' , 'assets/ground_grass.png');
 
         this.load.image('bunny-stand', 'assets/bunny1_stand.png');
